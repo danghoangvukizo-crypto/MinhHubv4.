@@ -1,0 +1,203 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+-- ⚙️ Window chính
+local Window = Rayfield:CreateWindow({
+   Name = "MinhXhub",
+   LoadingTitle = "Loading...",
+   LoadingSubtitle = "Private Hub",
+   ConfigurationSaving = {
+      Enabled = false,
+   },
+   KeySystem = true,
+   KeySettings = {
+      Title = "MinhXhub Key System",
+      Subtitle = "Enter your key",
+      Note = "",
+      SaveKey = false,
+      GrabKeyFromSite = false,
+      Key = {"MinhHub"},
+      UseLoadButton = true
+   },
+   Theme = "Blue"
+})
+
+-- 📐 UI scale + font
+Rayfield.DefaultSettings = {
+   Font = Enum.Font.GothamBold,
+   TextSize = 18,
+   ElementSize = UDim2.new(0, 250, 0, 45),
+   TabWidth = 160,
+   SectionSpacing = 12
+}
+
+-- CREDIT TAB
+local CreditTab = Window:CreateTab("Credit")
+CreditTab:CreateLabel("THIS SCRIPT WAS CREATED BY MINH")
+CreditTab:CreateLabel("THIS IS A COMPILATION HUB")
+CreditTab:CreateButton({
+   Name = "Copy Discord: vuminh._0",
+   Callback = function()
+      setclipboard("vuminh._0")
+      Rayfield:Notify({Title="Copied!", Content="Discord username copied.", Duration=3})
+   end,
+})
+
+-- TSB TAB
+local TSBTab = Window:CreateTab("TSB")
+TSBTab:CreateButton({Name="Supa Tech", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/MerebennieOfficial/ExoticJn/refs/heads/main/Supa%20V3"))() end})
+TSBTab:CreateButton({Name="Lethal Dash", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Cyborg883/InstantLethal/refs/heads/main/Protected_5983112998592296.lua"))() end})
+TSBTab:CreateButton({Name="Kiba V3", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/yqantg-pixel/Find/refs/heads/main/Protected_1593573630798166.lua.txt"))() end})
+TSBTab:CreateButton({Name="Side Dash", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Cyborg883/FakeDash/refs/heads/main/Protected_5833389828844912.lua"))() end})
+TSBTab:CreateButton({Name="Auto Kyoto", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Mark22028/Auto-Kyoto-Combo/refs/heads/main/Skibidi%20Sigma%20Combo.txt"))() end})
+
+-- FIX LAG TAB
+local FixLagTab = Window:CreateTab("Fix Lag")
+FixLagTab:CreateButton({Name="Bloxstrap (Mobile)", Callback=function() getgenv().autosetup={path='Bloxstrap',setup=true} loadstring(game:HttpGet('https://raw.githubusercontent.com/qwertyui-is-back/Bloxstrap/main/Initiate.lua'))() end})
+FixLagTab:CreateButton({Name="Fix Lag V1 (~50%)", Callback=function() settings().Rendering.QualityLevel=Enum.QualityLevel.Level01 setfpscap(60) end})
+FixLagTab:CreateButton({Name="Fix Lag V2 (~80%)", Callback=function() settings().Rendering.QualityLevel=Enum.QualityLevel.Automatic setfpscap(30) game.Lighting.GlobalShadows=false game.Lighting.FogEnd=9e9 for _,v in pairs(workspace:GetDescendants()) do if v:IsA("BasePart") then v.Material=Enum.Material.Plastic v.Reflectance=0 end end end})
+FixLagTab:CreateButton({Name="Fix Lag V3 (Max)", Callback=function() setfpscap(20) game.Lighting.GlobalShadows=false game.Lighting.FogEnd=9e9 for _,v in pairs(workspace:GetDescendants()) do if v:IsA("BasePart") then v.Material=Enum.Material.SmoothPlastic v.Reflectance=0 elseif v:IsA("Decal") or v:IsA("Texture") then v:Destroy() end end end})
+FixLagTab:CreateButton({Name="Soxcy FixLag", Callback=function()
+   local url = "https://gist.githubusercontent.com/soxcy-script/d71b1a3947568c9f97920fa8e746ca15/raw"
+   local ok, res = pcall(function()
+      local http_get = (syn and syn.request) and function(u) return syn.request({Url = u, Method = "GET"}).Body end
+                        or (request and function(u) return request({Url = u, Method = "GET"}).Body end)
+                        or function(u) return game:HttpGet(u) end
+      local source = http_get(url)
+      if not source or source == "" then error("HttpGet trả về rỗng hoặc nil.") end
+      local func, load_err = loadstring(source)
+      if not func then error("loadstring lỗi: "..tostring(load_err)) end
+      local exec_ok, exec_err = pcall(func)
+      if not exec_ok then error("Script runtime error: "..tostring(exec_err)) end
+   end)
+   if not ok then
+      warn("[Soxcy FixLag] Error: "..tostring(res))
+      pcall(function() game:GetService("StarterGui"):SetCore("SendNotification",{Title="Soxcy FixLag Error",Text=tostring(res),Duration=6}) end)
+   end
+end})
+
+-- 🌟 MinhHub Fix Lag (GUI riêng)
+FixLagTab:CreateButton({
+   Name = "MinhHub Fix Lag",
+   Callback = function()
+      -- ⚡ MinhHub FPS (FPS Buff + Anti Shake riêng biệt)
+      local function FPSBoost(enable)
+          if enable then
+              settings().Rendering.QualityLevel = Enum.QualityLevel.Level01
+              local Lighting = game:GetService("Lighting")
+              Lighting.GlobalShadows = false
+              Lighting.FogEnd = 9e9
+              Lighting.Brightness = 1
+              Lighting.Technology = Enum.Technology.Compatibility
+              for _, v in pairs(Lighting:GetChildren()) do
+                  if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("BloomEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("DepthOfFieldEffect") then
+                      v.Enabled = false
+                  end
+              end
+              for _, obj in pairs(workspace:GetDescendants()) do
+                  if obj:IsA("BasePart") then obj.Material = Enum.Material.Plastic obj.Reflectance = 0
+                  elseif obj:IsA("Decal") or obj:IsA("Texture") then obj.Transparency = 1
+                  elseif obj:IsA("ParticleEmitter") or obj:IsA("Trail") then obj.Enabled = false end
+              end
+              for _, s in pairs(game:GetDescendants()) do if s:IsA("Sound") then s.Volume = 0 end end
+              if workspace:FindFirstChild("Terrain") then
+                  local Terrain = workspace.Terrain
+                  Terrain.WaterWaveSize, Terrain.WaterWaveSpeed, Terrain.WaterReflectance, Terrain.WaterTransparency = 0,0,0,0
+              end
+          else
+              settings().Rendering.QualityLevel = Enum.QualityLevel.Automatic
+              game:GetService("Lighting").GlobalShadows = true
+          end
+      end
+      local antiShakeConnection
+      local function AntiShake(enable)
+          local lp = game:GetService("Players").LocalPlayer
+          if enable then
+              antiShakeConnection = game:GetService("RunService").RenderStepped:Connect(function()
+                  if lp and lp.Character and lp.Character:FindFirstChild("Humanoid") then
+                      lp.Character.Humanoid.CameraOffset = Vector3.new(0,0,0)
+                  end
+              end)
+          else
+              if antiShakeConnection then antiShakeConnection:Disconnect() antiShakeConnection=nil end
+          end
+      end
+      local ScreenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
+      ScreenGui.Name = "MinhHub_FPS"
+      local MainFrame = Instance.new("Frame")
+      MainFrame.Size = UDim2.new(0,220,0,150)
+      MainFrame.Position = UDim2.new(0.05,0,0.1,0)
+      MainFrame.BackgroundColor3 = Color3.fromRGB(25,25,25)
+      MainFrame.BorderSizePixel = 2
+      MainFrame.Parent = ScreenGui
+      MainFrame.Active = true MainFrame.Draggable = true
+      Instance.new("UICorner",MainFrame).CornerRadius = UDim.new(0,12)
+      local Title = Instance.new("TextLabel")
+      Title.Size=UDim2.new(1,0,0,25) Title.BackgroundTransparency=1
+      Title.Text="⚡ MinhHub FPS" Title.Font=Enum.Font.GothamBold Title.TextSize=20
+      Title.TextColor3=Color3.fromRGB(0,200,255) Title.Parent=MainFrame
+      local FPSButton=Instance.new("TextButton")
+      FPSButton.Size=UDim2.new(0,200,0,40) FPSButton.Position=UDim2.new(0.5,0,0,35)
+      FPSButton.AnchorPoint=Vector2.new(0.5,0) FPSButton.Text="⚡ FPS Buff: OFF"
+      FPSButton.BackgroundColor3=Color3.fromRGB(170,0,0) FPSButton.TextColor3=Color3.fromRGB(255,255,255)
+      FPSButton.TextScaled=true FPSButton.Parent=MainFrame Instance.new("UICorner",FPSButton).CornerRadius=UDim.new(0,10)
+      local ShakeButton=Instance.new("TextButton")
+      ShakeButton.Size=UDim2.new(0,200,0,40) ShakeButton.Position=UDim2.new(0.5,0,0,80)
+      ShakeButton.AnchorPoint=Vector2.new(0.5,0) ShakeButton.Text="🎥 Anti Shake: OFF"
+      ShakeButton.BackgroundColor3=Color3.fromRGB(170,0,0) ShakeButton.TextColor3=Color3.fromRGB(255,255,255)
+      ShakeButton.TextScaled=true ShakeButton.Parent=MainFrame Instance.new("UICorner",ShakeButton).CornerRadius=UDim.new(0,10)
+      local FPSLabel=Instance.new("TextLabel")
+      FPSLabel.Size=UDim2.new(1,-10,0,25) FPSLabel.Position=UDim2.new(0,5,1,-30)
+      FPSLabel.BackgroundTransparency=1 FPSLabel.TextColor3=Color3.fromRGB(0,255,0)
+      FPSLabel.TextScaled=true FPSLabel.Font=Enum.Font.Code FPSLabel.Text="FPS: ..." FPSLabel.Parent=MainFrame
+      local RunService=game:GetService("RunService") local fps,frames,lastTime=0,0,tick()
+      RunService.RenderStepped:Connect(function()
+          frames=frames+1 if tick()-lastTime>=1 then fps=frames frames=0 lastTime=tick()
+              FPSLabel.Text="FPS: "..fps
+              if fps<30 then FPSLabel.TextColor3=Color3.fromRGB(255,0,0)
+              elseif fps<50 then FPSLabel.TextColor3=Color3.fromRGB(255,255,0)
+              else FPSLabel.TextColor3=Color3.fromRGB(0,255,0) end
+          end
+      end)
+      local fpsEnabled=false
+      FPSButton.MouseButton1Click:Connect(function()
+          fpsEnabled=not fpsEnabled FPSBoost(fpsEnabled)
+          if fpsEnabled then FPSButton.Text="⚡ FPS Buff: ON" FPSButton.BackgroundColor3=Color3.fromRGB(0,170,0)
+          else FPSButton.Text="⚡ FPS Buff: OFF" FPSButton.BackgroundColor3=Color3.fromRGB(170,0,0) end
+      end)
+      local shakeEnabled=false
+      ShakeButton.MouseButton1Click:Connect(function()
+          shakeEnabled=not shakeEnabled AntiShake(shakeEnabled)
+          if shakeEnabled then ShakeButton.Text="🎥 Anti Shake: ON" ShakeButton.BackgroundColor3=Color3.fromRGB(0,170,0)
+          else ShakeButton.Text="🎥 Anti Shake: OFF" ShakeButton.BackgroundColor3=Color3.fromRGB(170,0,0) end
+      end)
+   end
+})
+
+-- HYPERSHOT TAB
+local HyperTab = Window:CreateTab("Hypershot")
+HyperTab:CreateButton({Name="FeykScript", Callback=function() loadstring(game:HttpGet("https://rawscripts.net/raw/NEW!-Hypershot-(Gunfight)-Feykhub-Keyless-47349"))() end})
+HyperTab:CreateButton({Name="XVC Hub", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/XVCHub/Games/main/HyperShot"))() end})
+
+-- 99 NIGHTS TAB
+local ForestTab = Window:CreateTab("99 Nights in the Forest")
+ForestTab:CreateButton({Name="Vxeze", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Dex-Bear/Vxezehub/refs/heads/main/VxezeHub99daysintheforest.lua"))() end})
+ForestTab:CreateButton({Name="Voidware", Callback=function() loadstring(game:HttpGet("https://rawscripts.net/raw/99-Nights-in-the-Forest-Voidware-48939"))() end})
+ForestTab:CreateButton({Name="Mirrozz", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Qiwikox12/stubrawl/refs/heads/main/99Night.txt"))() end})
+ForestTab:CreateButton({Name="Foxname", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/caomod2077/Script/refs/heads/main/FoxnameHub.lua"))() end})
+ForestTab:CreateButton({Name="Vex", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/yoursvexyyy/99-days-in-forest/refs/heads/main/vex%20op%20full%20gui"))() end})
+ForestTab:CreateButton({Name="Kenniel (Need GetKey)", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Kenniel123/99-Nights-in-the-Forest/refs/heads/main/99%20Nights%20in%20the%20Forest"))() end})
+
+-- BLADE BALL TAB
+local BladeBallTab = Window:CreateTab("Blade Ball")
+BladeBallTab:CreateButton({Name="catsus", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/-beta-/main/AutoParry.lua"))() end})
+BladeBallTab:CreateButton({Name="ProJect DZ", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/DenDenZZZ/Project-DZ/refs/heads/main/Blade%20Ball.lua"))() end})
+BladeBallTab:CreateButton({Name="Argon Hub X", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/AgentX771/ArgonHubX/main/Loader.lua"))() end})
+
+-- BLOX FRUITS TAB
+local BFruitTab = Window:CreateTab("Blox Fruits")
+BFruitTab:CreateButton({Name="Xeter", Callback=function() getgenv().Version="V1" getgenv().Team="Marines" loadstring(game:HttpGet("https://raw.githubusercontent.com/TlDinhKhoi/Xeter/refs/heads/main/Main.lua"))()("t.me/XScepTskX") end})
+BFruitTab:CreateButton({Name="Banana", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/kimprobloxdz/Banana-Free/refs/heads/main/Protected_5609200582002947.lua.txt"))() end})
+BFruitTab:CreateButton({Name="Idk Script", Callback=function() getgenv().Team="Pirates" loadstring(game:HttpGet("https://raw.githubusercontent.com/Teddyseetink/AkGamingEz/refs/heads/main/AkGaming-V3"))() end})
+BFruitTab:CreateButton({Name="TsouHub", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Tsuo7/TsuoHub/main/Tsuoscripts"))() end})
+BFruitTab:CreateButton({Name="W-azure", Callback=function() loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/85e904ae1ff30824c1aa007fc7324f8f.lua"))() end})
+BFruitTab:CreateButton({Name="Aimbot", Callback=function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ParadozCode/ParadozHub-/refs/heads/main/Paradoz%20Hub%20CentuDox.lua"))() end})
